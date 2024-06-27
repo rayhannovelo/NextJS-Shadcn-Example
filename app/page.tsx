@@ -102,8 +102,8 @@ export default function Page() {
           </Form>
         </CardContent>
         <CardFooter className="flex-col">
-          <p className="block">© 2024 Powered By Ray</p>
-          <p className="block">All rights reserved</p>
+          <p>© 2024 Powered By Ray</p>
+          <p>All rights reserved</p>
         </CardFooter>
       </Card>
     </div>
