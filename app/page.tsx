@@ -21,12 +21,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { AlertCircle } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useTransition, useState } from "react"
+import { handleSignIn } from "./actions/authAction"
 
 const formSchema = z.object({
-  username: z.string(),
-  password: z.string(),
+  username: z.string().nonempty("Username is required"),
+  password: z.string().nonempty("Password is required"),
 })
 
 export default function Page() {
@@ -38,22 +42,15 @@ export default function Page() {
     },
   })
 
+  const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState("")
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+    setError("")
 
-    try {
-      const response = await axios.post(`${backendUrl}/auth`, values)
-
-      if (response.data.success) {
-        alert("Login success!")
-      } else {
-        alert("Login failed!")
-      }
-      // Handle success, e.g., redirect or store token
-    } catch (error) {
-      alert("Login failed!")
-      // Handle error, show message to user
-    }
+    startTransition(async () => {
+      const data = await handleSignIn(values)
+      if (data && data.error) setError(data!.error!)
+    })
   }
 
   return (
@@ -63,6 +60,13 @@ export default function Page() {
           <CardTitle className="text-center text-4xl">Login</CardTitle>
         </CardHeader>
         <CardContent>
+          {error && (
+            <Alert variant="destructive" className="mb-5">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
@@ -95,7 +99,7 @@ export default function Page() {
                   </FormItem>
                 )}
               />
-              <Button className="w-full" type="submit">
+              <Button className="w-full" type="submit" disabled={isPending}>
                 Submit
               </Button>
             </form>
