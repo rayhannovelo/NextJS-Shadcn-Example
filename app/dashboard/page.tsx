@@ -1,5 +1,4 @@
 import { auth } from "@/auth"
-import { SignOutButton } from "@/components/signout-button"
 import { redirect } from "next/navigation"
 import {
   Card,
@@ -9,6 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { signOut } from "@/auth"
+import { Button } from "@/components/ui/button"
 
 export default async function Dashboard() {
   const session = await auth()
@@ -26,7 +27,14 @@ export default async function Dashboard() {
           <pre>{JSON.stringify(session, null, 2)}</pre>
         </CardContent>
         <CardFooter className="flex-col">
-          <SignOutButton />
+          <form
+            action={async () => {
+              "use server"
+              await signOut({ redirectTo: "/", redirect: true })
+            }}
+          >
+            <Button type="submit">Sign Out</Button>
+          </form>
         </CardFooter>
       </Card>
     </div>
