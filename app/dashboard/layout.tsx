@@ -9,7 +9,7 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: "Login | Next.js Shadcn Example",
+  title: "Dashboard | Next.js Shadcn Example",
   description: "Next.js page with Shadcn",
 }
 

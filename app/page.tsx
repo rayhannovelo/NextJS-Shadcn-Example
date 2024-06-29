@@ -1,9 +1,9 @@
 "use client"
 
+import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import axios from "axios"
 import {
   Card,
   CardContent,
@@ -46,7 +46,6 @@ export default function Page() {
   const [error, setError] = useState("")
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setError("")
-
     startTransition(async () => {
       const data = await handleSignIn(values)
       if (data && data.error) setError(data!.error!)
