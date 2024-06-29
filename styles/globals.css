@@ -33,6 +33,16 @@
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    /* custom color */
+    --success: 120 61% 34%; /* Example: A green color */
+    --success-foreground: 120 100% 98%; /* Light green foreground */
+
+    --warning: 39 100% 50%; /* Example: An orange color */
+    --warning-foreground: 39 100% 98%; /* Light orange foreground */
+
+    --info: 200 100% 40%; /* Example: A blue color */
+    --info-foreground: 200 100% 98%; /* Light blue foreground */
   }
 
   .dark {

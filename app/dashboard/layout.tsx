@@ -13,21 +13,6 @@ export const metadata: Metadata = {
   description: "Next.js page with Shadcn",
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
-        {children}
-      </body>
-    </html>
-  )
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <div>{children}</div>
 }
