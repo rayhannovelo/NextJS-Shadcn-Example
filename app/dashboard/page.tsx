@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 export default async function Dashboard() {
   const session = await auth()
 
-  if (!session?.user) return redirect("/")
+  if (!session?.user) return redirect("/?alert=unauthorized")
 
   return (
     <div className="min-h-screen flex justify-center items-center">

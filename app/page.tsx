@@ -46,12 +46,21 @@ export default function Page() {
   const [alert, setAlert] = useState<AlertType | null>(null)
 
   useEffect(() => {
-    if (alertParam == "logout") {
-      setAlert({
-        variant: "success",
-        title: "Success",
-        description: "Logout success!",
-      })
+    if (alertParam) {
+      if (alertParam == "logout") {
+        setAlert({
+          variant: "success",
+          title: "Success",
+          description: "Logout success!",
+        })
+      } else if (alertParam == "unauthorized") {
+        setAlert({
+          variant: "warning",
+          title: "Warning",
+          description: "Unauthorized Access!",
+        })
+      }
+
       router.push("/")
     }
   }, [router, alertParam])
@@ -87,7 +96,10 @@ export default function Page() {
         <CardContent>
           {alert && (
             <Alert variant={alert.variant} className="mb-5">
-              <AlertCircle className="h-4 w-4" />
+              <AlertCircle
+                className="
+              h-4 w-4"
+              />
               <AlertTitle>{alert.title}</AlertTitle>
               <AlertDescription>{alert.description}</AlertDescription>
             </Alert>
