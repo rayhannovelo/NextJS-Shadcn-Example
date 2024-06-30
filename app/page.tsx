@@ -40,7 +40,6 @@ type AlertType = {
 }
 
 export default function Page() {
-  console.log("a")
   const router = useRouter()
   const searchParams = useSearchParams()
   const alertParam = searchParams.get("alert")
