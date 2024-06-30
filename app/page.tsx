@@ -1,6 +1,5 @@
 "use client"
 
-import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -25,15 +24,39 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { useTransition, useState } from "react"
+import { useTransition, useState, useEffect, use } from "react"
 import { handleSignIn } from "./actions/authAction"
+import { useRouter, useSearchParams } from "next/navigation"
 
 const formSchema = z.object({
   username: z.string().nonempty("Username is required"),
   password: z.string().nonempty("Password is required"),
 })
 
+type AlertType = {
+  variant: "destructive" | "success" | "warning" | "info"
+  title: string
+  description: string
+}
+
 export default function Page() {
+  console.log("a")
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const alertParam = searchParams.get("alert")
+  const [alert, setAlert] = useState<AlertType | null>(null)
+
+  useEffect(() => {
+    if (alertParam == "logout") {
+      setAlert({
+        variant: "success",
+        title: "Success",
+        description: "Logout success!",
+      })
+      router.push("/")
+    }
+  }, [router, alertParam])
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,12 +66,16 @@ export default function Page() {
   })
 
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState("")
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setError("")
+    setAlert(null)
     startTransition(async () => {
       const data = await handleSignIn(values)
-      if (data && data.error) setError(data!.error!)
+      if (data && data.error)
+        setAlert({
+          variant: "destructive",
+          title: "error",
+          description: data!.error,
+        })
     })
   }
 
@@ -59,11 +86,11 @@ export default function Page() {
           <CardTitle className="text-center text-4xl">Login</CardTitle>
         </CardHeader>
         <CardContent>
-          {error && (
-            <Alert variant="destructive" className="mb-5">
+          {alert && (
+            <Alert variant={alert.variant} className="mb-5">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
+              <AlertTitle>{alert.title}</AlertTitle>
+              <AlertDescription>{alert.description}</AlertDescription>
             </Alert>
           )}
           <Form {...form}>
