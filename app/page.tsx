@@ -143,7 +143,9 @@ export default function Page() {
           </Form>
         </CardContent>
         <CardFooter className="flex-col">
-          <p>© 2024 Powered By Ray</p>
+          <p>
+            © 2024 Powered By <span className="font-semibold">StoicDev</span>
+          </p>
           <p>All rights reserved</p>
         </CardFooter>
       </Card>
