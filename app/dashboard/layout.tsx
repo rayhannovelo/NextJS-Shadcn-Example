@@ -37,7 +37,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </Button>
           </div>
           <div className="flex-1 flex flex-col gap-2 p-5">
-            <span className="text-primary font-bold px-3 py-2">Main Menu</span>
+            <span className="text-primary font-bold px-3 py-2">
+              Main Navigation
+            </span>
             <Link
               href="/dashboard"
               className="flex items-center gap-3 bg-muted rounded-lg px-3 py-2"
