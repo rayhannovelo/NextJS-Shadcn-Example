@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
-import { cn } from "@/lib/utils"
 import "@/styles/globals.css"
+import Main from "@/components/Main"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>
+  return <Main>{children}</Main>
 }

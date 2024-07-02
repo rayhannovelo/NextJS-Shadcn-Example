@@ -17,7 +17,7 @@ export default async function Dashboard() {
   if (!session?.user) return redirect("/?alert=unauthorized")
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-full flex justify-center items-center">
       <Card className="sm:min-w-96">
         <CardHeader>
           <CardTitle className="text-center text-4xl">Login Success</CardTitle>
