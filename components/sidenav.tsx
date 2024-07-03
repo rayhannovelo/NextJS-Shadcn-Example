@@ -10,6 +10,14 @@ import {
   FileText,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 
 export default function SideNav() {
   return (
@@ -24,7 +32,7 @@ export default function SideNav() {
           <span className="sr-only">Side</span>
         </Button>
       </div>
-      <div className="flex-1 hidden md:flex flex-col gap-2 p-5 transition-all">
+      <nav className="flex-1 hidden md:flex flex-col gap-2 p-5 transition-all">
         <span className="text-primary font-bold px-3 py-2">
           Main Navigation
         </span>
@@ -76,6 +84,80 @@ export default function SideNav() {
           <FileText className="h-4 w-4" />
           Post
         </Link>
+      </nav>
+      <div className="flex-none md:hidden flex justify-center items-center border-b h-14 px-4">
+        <div className="flex items-center font-semibold gap-2">
+          <Cpu className="w-8 h-8" />
+          <span>StoicDev</span>
+        </div>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
+              <Menu className="h-4 w-4" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <SheetHeader>
+              <SheetTitle className="p-3">
+                <Cpu className="w-8 h-8" />
+              </SheetTitle>
+              <SheetDescription></SheetDescription>
+            </SheetHeader>
+            <nav className="flex-1 flex flex-col gap-2 transition-all">
+              <span className="text-primary font-bold px-3 py-2">
+                Main Navigation
+              </span>
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-3 bg-muted rounded-lg px-3 py-2"
+              >
+                <Home className="h-4 w-4" />
+                Dashboard
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <User className="h-4 w-4" />
+                Profil
+              </Link>
+              <span className="text-primary font-bold px-3 py-2">
+                User Management
+              </span>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <Users className="h-4 w-4" />
+                Users
+              </Link>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <UserCog className="h-4 w-4" />
+                User Roles
+              </Link>{" "}
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <UserCheck className="h-4 w-4" />
+                User Statuses
+              </Link>
+              <span className="text-primary font-bold px-3 py-2">
+                Post Management
+              </span>
+              <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground hover:text-primary"
+              >
+                <FileText className="h-4 w-4" />
+                Post
+              </Link>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
     </aside>
   )
