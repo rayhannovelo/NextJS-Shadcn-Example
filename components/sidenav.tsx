@@ -8,6 +8,7 @@ import {
   UserCheck,
   User,
   FileText,
+  CircleUser,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,16 +19,25 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { signOut } from "@/auth"
 
 export default function SideNav() {
   return (
     <aside className="flex flex-col border-r overflow-y-auto max-h-screen">
-      <div className="flex-none hidden md:flex justify-center items-center border-b h-14 px-4">
+      <div className="flex-none hidden md:flex justify-between items-center border-b h-14 px-4">
         <div className="flex items-center font-semibold gap-2">
           <Cpu className="w-8 h-8" />
           <span>StoicDev</span>
         </div>
-        <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
+        <Button variant="outline" size="icon" className="h-8 w-8">
           <Menu className="h-4 w-4" />
           <span className="sr-only">Side</span>
         </Button>
@@ -85,14 +95,10 @@ export default function SideNav() {
           Post
         </Link>
       </nav>
-      <div className="flex-none md:hidden flex justify-center items-center border-b h-14 px-4">
-        <div className="flex items-center font-semibold gap-2">
-          <Cpu className="w-8 h-8" />
-          <span>StoicDev</span>
-        </div>
+      <header className="flex-none md:hidden flex justify-between items-center border-b h-14 px-4">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
+            <Button variant="outline" size="icon" className="h-8 w-8">
               <Menu className="h-4 w-4" />
             </Button>
           </SheetTrigger>
@@ -158,7 +164,39 @@ export default function SideNav() {
             </nav>
           </SheetContent>
         </Sheet>
-      </div>
+        <div className="flex justify-center items-center font-semibold gap-2">
+          <Cpu className="w-8 h-8" />
+          <span>StoicDev</span>
+        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="secondary" size="icon" className="rounded-full">
+              <CircleUser className="h-5 w-5" />
+              <span className="sr-only">Toggle user menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem>Support</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <form
+                action={async () => {
+                  "use server"
+                  await signOut({
+                    redirectTo: "/?alert=logout",
+                    redirect: true,
+                  })
+                }}
+              >
+                <button type="submit">Logout</button>
+              </form>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </header>
     </aside>
   )
 }

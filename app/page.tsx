@@ -89,7 +89,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <Card className="sm:min-w-96">
+      <Card className="w-full m-5 sm:min-w-96">
         <CardHeader>
           <CardTitle className="text-center text-4xl">Login</CardTitle>
         </CardHeader>
