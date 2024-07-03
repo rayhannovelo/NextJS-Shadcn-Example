@@ -18,13 +18,13 @@ export default async function Dashboard() {
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <Card className="sm:min-w-96">
+      <Card className="w-96">
         <CardHeader>
           <CardTitle className="text-center text-4xl">Login Success</CardTitle>
         </CardHeader>
         <CardContent>
           <h3>Session data:</h3>
-          <pre>{JSON.stringify(session, null, 2)}</pre>
+          <pre className="text-wrap">{JSON.stringify(session, null, 2)}</pre>
         </CardContent>
         <CardFooter className="flex-col">
           <form
