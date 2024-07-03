@@ -14,8 +14,8 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function SideNav() {
   return (
-    <ScrollArea className="max-h-screen hidden md:block">
-      <aside className="flex flex-col h-full w-full border-r">
+    <aside className="flex flex-col h-full w-full border-r bg-red-300">
+      <ScrollArea className="max-h-screen hidden md:block">
         <div className="flex justify-center items-center border-b h-14 px-4">
           <div className="flex items-center font-semibold gap-2">
             <Cpu className="w-8 h-8" />
@@ -79,7 +79,7 @@ export default function SideNav() {
             Post
           </Link>
         </div>
-      </aside>
-    </ScrollArea>
+      </ScrollArea>
+    </aside>
   )
 }
