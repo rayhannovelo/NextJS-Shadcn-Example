@@ -17,26 +17,18 @@ export default async function Dashboard() {
   if (!session?.user) return redirect("/?alert=unauthorized")
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <Card className="w-96">
-        <CardHeader>
-          <CardTitle className="text-center text-4xl">Login Success</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <h3>Session data:</h3>
-          <pre className="text-wrap">{JSON.stringify(session, null, 2)}</pre>
-        </CardContent>
-        <CardFooter className="flex-col">
-          <form
-            action={async () => {
-              "use server"
-              await signOut({ redirectTo: "/?alert=logout", redirect: true })
-            }}
-          >
-            <Button type="submit">Sign Out</Button>
-          </form>
-        </CardFooter>
-      </Card>
-    </div>
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>Dashboard</CardTitle>
+        <CardDescription>Default dashboard</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>Session data</p>
+        <pre className="text-wrap bg-slate-800 text-muted rounded-lg mt-3 p-3">
+          <code>{JSON.stringify(session, null, 2)}</code>
+        </pre>
+      </CardContent>
+      <CardFooter></CardFooter>
+    </Card>
   )
 }
