@@ -8,8 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { signOut } from "@/auth"
-import { Button } from "@/components/ui/button"
 
 export default async function Dashboard() {
   const session = await auth()
