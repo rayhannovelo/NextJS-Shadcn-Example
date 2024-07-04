@@ -31,32 +31,6 @@ export default async function Dashboard() {
         </CardContent>
         <CardFooter></CardFooter>
       </Card>
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle>Dashboard</CardTitle>
-          <CardDescription>Default dashboard</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Session data</p>
-          <pre className="text-wrap bg-slate-800 text-muted rounded-lg mt-3 p-3">
-            <code>{JSON.stringify(session, null, 2)}</code>
-          </pre>
-        </CardContent>
-        <CardFooter></CardFooter>
-      </Card>
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle>Dashboard</CardTitle>
-          <CardDescription>Default dashboard</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Session data</p>
-          <pre className="text-wrap bg-slate-800 text-muted rounded-lg mt-3 p-3">
-            <code>{JSON.stringify(session, null, 2)}</code>
-          </pre>
-        </CardContent>
-        <CardFooter></CardFooter>
-      </Card>
     </main>
   )
 }
