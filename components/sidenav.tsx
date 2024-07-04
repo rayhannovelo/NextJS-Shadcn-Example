@@ -102,7 +102,7 @@ export default function SideNav() {
               <Menu className="h-4 w-4" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left">
+          <SheetContent side="left" className="overflow-y-auto">
             <SheetHeader>
               <SheetTitle className="p-3">
                 <Cpu className="w-8 h-8" />

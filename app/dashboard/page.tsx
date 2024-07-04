@@ -17,18 +17,46 @@ export default async function Dashboard() {
   if (!session?.user) return redirect("/?alert=unauthorized")
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Dashboard</CardTitle>
-        <CardDescription>Default dashboard</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>Session data</p>
-        <pre className="text-wrap bg-slate-800 text-muted rounded-lg mt-3 p-3">
-          <code>{JSON.stringify(session, null, 2)}</code>
-        </pre>
-      </CardContent>
-      <CardFooter></CardFooter>
-    </Card>
+    <main className="flex flex-col gap-5 justify-center content-center p-5">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Dashboard</CardTitle>
+          <CardDescription>Default dashboard</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>Session data</p>
+          <pre className="text-wrap bg-slate-800 text-muted rounded-lg mt-3 p-3">
+            <code>{JSON.stringify(session, null, 2)}</code>
+          </pre>
+        </CardContent>
+        <CardFooter></CardFooter>
+      </Card>
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Dashboard</CardTitle>
+          <CardDescription>Default dashboard</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>Session data</p>
+          <pre className="text-wrap bg-slate-800 text-muted rounded-lg mt-3 p-3">
+            <code>{JSON.stringify(session, null, 2)}</code>
+          </pre>
+        </CardContent>
+        <CardFooter></CardFooter>
+      </Card>
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>Dashboard</CardTitle>
+          <CardDescription>Default dashboard</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>Session data</p>
+          <pre className="text-wrap bg-slate-800 text-muted rounded-lg mt-3 p-3">
+            <code>{JSON.stringify(session, null, 2)}</code>
+          </pre>
+        </CardContent>
+        <CardFooter></CardFooter>
+      </Card>
+    </main>
   )
 }
