@@ -6,7 +6,6 @@ import { z } from "zod"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -24,9 +23,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { useTransition, useState, useEffect, use } from "react"
+import { useTransition, useState, useEffect } from "react"
 import { handleSignIn } from "./actions/authAction"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   username: z.string().nonempty("Username is required"),
@@ -39,10 +38,15 @@ type AlertType = {
   description: string
 }
 
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    alert?: string
+  }
+}) {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const alertParam = searchParams.get("alert")
+  const alertParam = searchParams?.alert || null
   const [alert, setAlert] = useState<AlertType | null>(null)
 
   useEffect(() => {
@@ -61,7 +65,7 @@ export default function Page() {
         })
       }
 
-      router.push("/")
+      router.replace("/")
     }
   }, [router, alertParam])
 
