@@ -12,8 +12,6 @@ import {
 export default async function Dashboard() {
   const session = await auth()
 
-  if (!session?.user) return redirect("/?alert=unauthorized")
-
   return (
     <main className="flex flex-col gap-5 justify-center content-center p-5">
       <Card className="w-full">

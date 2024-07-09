@@ -19,7 +19,7 @@ export default function SideNav() {
           <Cpu className="w-8 h-8" />
           <span>StoicDev</span>
         </div>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" className="h-8 w-8">
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle Side Menu</span>
         </Button>

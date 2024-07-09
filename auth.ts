@@ -3,6 +3,8 @@ import Credentials from "next-auth/providers/credentials"
 import { CredentialsSignin } from "next-auth"
 import axios from "axios"
 import { DateTime } from "next-auth/providers/kakao"
+import { redirect } from "next/navigation"
+import next from "next"
 
 declare module "next-auth" {
   /**
@@ -50,7 +52,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  pages: {
+    signIn: "/",
+  },
   callbacks: {
+    authorized: async ({ auth, request: { nextUrl } }) => {
+      const isLoggedIn = !!auth?.user
+      const isOnLogin = nextUrl.pathname == "/"
+
+      if (isLoggedIn) {
+        if (isOnLogin) {
+          return Response.redirect(new URL("/dashboard", nextUrl))
+        } else {
+          return true
+        }
+      } else {
+        if (isOnLogin) {
+          return false
+        } else {
+          const loginUrl = new URL("/", nextUrl)
+          loginUrl.searchParams.set("alert", "unauthorized")
+
+          return Response.redirect(loginUrl)
+        }
+      }
+    },
     jwt({ token, user, trigger, session }) {
       if (user) {
         // User is available during sign-in
