@@ -168,7 +168,7 @@ export default function Header() {
         </Sheet>
         <div className="flex justify-center items-center font-semibold gap-2">
           <Cpu className="w-8 h-8" />
-          <span>StoicDev</span>
+          <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

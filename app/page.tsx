@@ -148,7 +148,10 @@ export default function Page({
         </CardContent>
         <CardFooter className="flex-col">
           <p>
-            © 2024 Powered By <span className="font-semibold">StoicDev</span>
+            © 2024 Powered By
+            <span className="font-semibold">
+              {process.env.NEXT_PUBLIC_APP_NAME}
+            </span>
           </p>
           <p>All rights reserved</p>
         </CardFooter>

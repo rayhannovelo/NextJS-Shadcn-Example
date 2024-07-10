@@ -17,7 +17,7 @@ export default function SideNav() {
       <div className="flex-none hidden md:flex justify-between items-center border-b h-16 px-4">
         <div className="flex items-center font-semibold gap-2">
           <Cpu className="w-8 h-8" />
-          <span>StoicDev</span>
+          <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </div>
         <Button variant="outline" size="icon" className="h-8 w-8">
           <Menu className="h-5 w-5" />

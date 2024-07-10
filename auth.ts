@@ -36,7 +36,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+          const backendUrl = process.env.BACKEND_URL
           const response = await axios.post(`${backendUrl}/auth`, credentials)
           const user = response.data.data.user
           user.user_token = response.data.data.user_token
