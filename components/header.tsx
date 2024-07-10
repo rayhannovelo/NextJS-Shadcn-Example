@@ -97,7 +97,7 @@ export default function Header() {
           </DropdownMenu>
         </div>
       </div>
-      <div className="md:hidden flex justify-between items-center border-b h-14 px-4">
+      <div className="md:hidden flex justify-between items-center border-b h-16 px-4">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon">

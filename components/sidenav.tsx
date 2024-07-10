@@ -1,6 +1,5 @@
 import Link from "next/link"
 import {
-  Menu,
   Cpu,
   Home,
   Users,
@@ -8,6 +7,7 @@ import {
   UserCheck,
   User,
   FileText,
+  Bell,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -20,8 +20,9 @@ export default function SideNav() {
           <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </div>
         <Button variant="outline" size="icon" className="h-8 w-8">
-          <Menu className="h-5 w-5" />
-          <span className="sr-only">Toggle Side Menu</span>
+          <Link href="/">
+            <Bell className="h-5 w-5" />
+          </Link>
         </Button>
       </div>
       <nav className="flex-1 hidden md:flex flex-col gap-2 p-5 transition-all">
