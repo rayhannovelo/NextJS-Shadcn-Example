@@ -36,8 +36,8 @@ import {
 } from "lucide-react"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { signOut } from "@/auth"
 import Link from "next/link"
+import { handleSignOut } from "@/app/actions/authAction"
 
 export default function Header() {
   return (
@@ -83,11 +83,7 @@ export default function Header() {
               <DropdownMenuItem>
                 <form
                   action={async () => {
-                    "use server"
-                    await signOut({
-                      redirectTo: "/?alert=logout",
-                      redirect: true,
-                    })
+                    await handleSignOut()
                   }}
                 >
                   <button type="submit">Logout</button>
@@ -186,11 +182,7 @@ export default function Header() {
             <DropdownMenuItem>
               <form
                 action={async () => {
-                  "use server"
-                  await signOut({
-                    redirectTo: "/?alert=logout",
-                    redirect: true,
-                  })
+                  await handleSignOut()
                 }}
               >
                 <button type="submit">Logout</button>

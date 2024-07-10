@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import {
   Menu,
@@ -10,16 +12,34 @@ import {
   FileText,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useState } from "react"
 
-export default function SideNav() {
+export default function SideNav({
+  isSidebarOpen,
+  toggleSidebar,
+}: {
+  isSidebarOpen: boolean
+  toggleSidebar: () => void
+}) {
+  const hidden = isSidebarOpen ? "" : "hidden"
+
   return (
-    <aside className="flex flex-col border-r overflow-y-auto max-h-screen">
+    <aside
+      className={`flex flex-col border-r overflow-y-auto max-h-screen ${
+        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+      } transition-transform duration-300`}
+    >
       <div className="flex-none hidden md:flex justify-between items-center border-b h-16 px-4">
         <div className="flex items-center font-semibold gap-2">
           <Cpu className="w-8 h-8" />
-          <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
+          <span className={hidden}>{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </div>
-        <Button variant="outline" size="icon" className="h-8 w-8">
+        <Button
+          variant="outline"
+          size="icon"
+          className="h-8 w-8"
+          onClick={() => toggleSidebar()}
+        >
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle Side Menu</span>
         </Button>

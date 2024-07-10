@@ -1,6 +1,6 @@
 "use server"
 
-import { signIn } from "@/auth"
+import { signIn, signOut } from "@/auth"
 import { AuthError } from "next-auth"
 import { z } from "zod"
 
@@ -32,4 +32,11 @@ export const handleSignIn = async (credentials: z.infer<typeof formSchema>) => {
 
     throw error
   }
+}
+
+export const handleSignOut = async () => {
+  await signOut({
+    redirectTo: "/?alert=logout",
+    redirect: true,
+  })
 }
