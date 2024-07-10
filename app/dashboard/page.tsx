@@ -1,5 +1,4 @@
 import { auth } from "@/auth"
-import { redirect } from "next/navigation"
 import {
   Card,
   CardContent,
@@ -22,7 +21,9 @@ export default async function Dashboard() {
         <CardContent>
           <p>Session data</p>
           <pre className="text-wrap bg-slate-800 text-muted rounded-lg mt-3 p-3">
-            <code>{JSON.stringify(session, null, 2)}</code>
+            <code className="text-white">
+              {JSON.stringify(session, null, 2)}
+            </code>
           </pre>
         </CardContent>
         <CardFooter></CardFooter>

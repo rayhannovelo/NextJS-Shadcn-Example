@@ -7,15 +7,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
   Sheet,
   SheetContent,
   SheetDescription,
@@ -36,8 +27,9 @@ import {
 } from "lucide-react"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { signOut } from "@/auth"
 import Link from "next/link"
+import { ThemeButton } from "@/components/theme-button"
+import { UserButton } from "@/components/user-button"
 
 export default function Header() {
   return (
@@ -65,36 +57,10 @@ export default function Header() {
               className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
             />
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="overflow-hidden rounded-full"
-              >
-                <User className="h-5 w-5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <form
-                  action={async () => {
-                    "use server"
-                    await signOut({
-                      redirectTo: "/?alert=logout",
-                      redirect: true,
-                    })
-                  }}
-                >
-                  <button type="submit">Logout</button>
-                </form>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div>
+            <ThemeButton />
+            <UserButton />
+          </div>
         </div>
       </div>
       <div className="md:hidden flex justify-between items-center border-b h-16 px-4">
@@ -170,34 +136,10 @@ export default function Header() {
           <Cpu className="w-8 h-8" />
           <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" className="rounded-full">
-              <User className="h-5 w-5" />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <form
-                action={async () => {
-                  "use server"
-                  await signOut({
-                    redirectTo: "/?alert=logout",
-                    redirect: true,
-                  })
-                }}
-              >
-                <button type="submit">Logout</button>
-              </form>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div>
+          <ThemeButton />
+          <UserButton />
+        </div>
       </div>
     </header>
   )
