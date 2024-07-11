@@ -82,12 +82,13 @@ export default function Page({
     setAlert(null)
     startTransition(async () => {
       const data = await handleSignIn(values)
-      if (data && data.error)
+      if (data && data.error) {
         setAlert({
           variant: "destructive",
           title: "error",
           description: data!.error,
         })
+      }
     })
   }
 
