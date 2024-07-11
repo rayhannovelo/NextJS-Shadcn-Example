@@ -8,9 +8,7 @@ declare module "next-auth" {
   interface User {
     userRoleId: number
     userStatusId: number
-    user_token: {
-      token: string
-    }
+    userToken: string
   }
 
   interface Session {
@@ -22,9 +20,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     userRoleId: number
     userStatusId: number
-    user_token: {
-      token: string
-    }
+    userToken: string
   }
 }
 
@@ -40,7 +36,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const backendUrl = process.env.BACKEND_URL
           const response = await axios.post(`${backendUrl}/auth`, credentials)
           const user = response.data.data.user
-          user.user_token = response.data.data.user_token
+          user.userToken = response.data.data.user_token.token
 
           return user
         } catch (error: any) {
@@ -55,10 +51,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   pages: {
     signIn: "/",
-  },
-  session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
     authorized: async ({ auth, request: { nextUrl } }) => {
@@ -86,7 +78,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         token.userRoleId = user.userRoleId
         token.userStatusId = user.userStatusId
-        token.user_token = user.user_token
+        token.userToken = user.userToken
       }
 
       return token
@@ -95,7 +87,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token) {
         session.user.userRoleId = token.userRoleId
         session.user.userStatusId = token.userStatusId
-        session.user.user_token = token.user_token
+        session.user.userToken = token.userToken
       }
 
       return session
