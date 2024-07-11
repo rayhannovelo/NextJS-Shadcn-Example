@@ -1,28 +1,29 @@
-import NextAuth, { type DefaultSession } from "next-auth"
+import NextAuth, { type DefaultSession, User } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import { CredentialsSignin } from "next-auth"
 import axios from "axios"
-import { DateTime } from "next-auth/providers/kakao"
-import { redirect } from "next/navigation"
-import next from "next"
+import { JWT } from "next-auth/jwt"
 
 declare module "next-auth" {
-  /**
-   * Returned by `auth`, `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-   */
+  interface User {
+    userRoleId: number
+    userStatusId: number
+    user_token: {
+      token: string
+    }
+  }
+
   interface Session {
-    user: {
-      /** The user's postal address. */
-      id: number
-      userRoleId: number
-      userStatusId: number
-      username: string
-      name: string
-      photo: string
-      email: string
-      emailVerifiedAt: string
-      createdAt: DateTime
-      updatedAt: DateTime
+    user: User & DefaultSession["user"]
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    userRoleId: number
+    userStatusId: number
+    user_token: {
+      token: string
     }
   }
 }
@@ -55,6 +56,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/",
   },
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
   callbacks: {
     authorized: async ({ auth, request: { nextUrl } }) => {
       const isLoggedIn = !!auth?.user
@@ -77,17 +82,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       }
     },
-    jwt({ token, user, trigger, session }) {
+    jwt({ token, user }) {
       if (user) {
-        // User is available during sign-in
-        // token.user = user
+        token.userRoleId = user.userRoleId
+        token.userStatusId = user.userStatusId
+        token.user_token = user.user_token
       }
+
       return token
     },
     session({ session, token }) {
-      // console.log("session")
-      // session.user = token.user
-      // console.log("session-token", token)
+      if (token) {
+        session.user.userRoleId = token.userRoleId
+        session.user.userStatusId = token.userStatusId
+        session.user.user_token = token.user_token
+      }
+
       return session
     },
   },
