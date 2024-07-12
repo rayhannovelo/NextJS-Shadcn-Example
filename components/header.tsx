@@ -41,7 +41,7 @@ export default function Header() {
 
   return (
     <header>
-      <div className="hidden md:flex md:justify-between justify-center items-center px-5 h-16">
+      <div className="hidden md:flex items-center px-5 h-16">
         <nav>
           <Breadcrumb>
             <BreadcrumbList>
@@ -55,7 +55,7 @@ export default function Header() {
             </BreadcrumbList>
           </Breadcrumb>
         </nav>
-        <div className="flex gap-5">
+        <div className="flex gap-5 md:ml-auto">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
