@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { signOut } from "@/auth"
+import { handleSignOut } from "@/actions/authAction"
 
 export function UserButton() {
   return (
@@ -29,11 +29,7 @@ export function UserButton() {
         <DropdownMenuItem>
           <form
             action={async () => {
-              "use server"
-              await signOut({
-                redirectTo: "/?alert=logout",
-                redirect: true,
-              })
+              await handleSignOut()
             }}
           >
             <button type="submit">Logout</button>

@@ -24,7 +24,7 @@ import { AlertCircle } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useTransition, useState, useEffect } from "react"
-import { handleSignIn } from "@/app/actions/authAction"
+import { handleSignIn } from "@/actions/authAction"
 import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
