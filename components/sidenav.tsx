@@ -32,8 +32,8 @@ export default function SideNav() {
               className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
                 link.href
                   ? pathname === link.href
-                    ? "text-primary font-normal bg-gray-100"
-                    : "text-muted-foreground hover:text-primary hover:bg-gray-50"
+                    ? "text-primary font-normal bg-muted"
+                    : "text-muted-foreground hover:text-primary hover:bg-muted"
                   : "text-primary font-bold"
               }`}
             >
