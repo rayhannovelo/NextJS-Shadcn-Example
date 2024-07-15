@@ -45,25 +45,22 @@ export function DataTable<TData, TValue>({
     pageIndex: 0, //initial page index
     pageSize: 10, //default page size
   })
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-  const [rowSelection, setRowSelection] = useState({})
+  const [globalFilter, setGlobalFilter] = useState("")
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    onRowSelectionChange: setRowSelection,
+    onGlobalFilterChange: setGlobalFilter,
     state: {
       sorting,
       pagination,
-      columnFilters,
-      rowSelection,
+      globalFilter,
     },
   })
 
@@ -100,10 +97,8 @@ export function DataTable<TData, TValue>({
           <p>Search</p>
           <Input
             placeholder=""
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("email")?.setFilterValue(event.target.value)
-            }
+            value={globalFilter}
+            onChange={(e) => setGlobalFilter(e.target.value)}
             className="ml-2 w-full sm:w-64"
           />
         </div>
