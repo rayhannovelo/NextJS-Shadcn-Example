@@ -1,4 +1,7 @@
 import { Metadata } from "next"
+import { auth } from "@/auth"
+import axios from "axios"
+import { AlertCircle } from "lucide-react"
 import DashboardLayout from "@/components/dashboard-layout"
 import {
   Card,
@@ -8,119 +11,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Payment, columns } from "./columns"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { columns } from "./columns"
 import { DataTable } from "./data-table"
 
 export const metadata: Metadata = {
   title: "Users",
 }
 
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "success",
-      email: "a@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 200,
-      status: "pending",
-      email: "b@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "c@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-  ]
+async function getData() {
+  try {
+    const session = await auth()
+    const response = await axios.get(`${process.env.BACKEND_URL}/users`, {
+      headers: {
+        Authorization: `Bearer ${session?.user.userToken}`,
+      },
+    })
+    return response.data
+  } catch (error: any) {
+    return error.response.data
+  }
 }
 
 export default async function Users() {
@@ -135,7 +45,14 @@ export default async function Users() {
             <CardDescription>Users Management</CardDescription>
           </CardHeader>
           <CardContent>
-            <DataTable columns={columns} data={data} />
+            {!data.success && (
+              <Alert variant="destructive" className="mb-5">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Error Fetching Data</AlertTitle>
+                <AlertDescription>{data.message}</AlertDescription>
+              </Alert>
+            )}
+            <DataTable columns={columns} data={data.data ?? []} />
           </CardContent>
           <CardFooter></CardFooter>
         </Card>

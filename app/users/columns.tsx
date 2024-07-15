@@ -8,21 +8,20 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { DataTableColumnHeader } from "@/components/datatable-header-column"
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
+// define data
+export type Users = {
   id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
+  userRoleId: number
+  username: string
+  name: string
   email: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Users>[] = [
   {
     id: "index",
     header: ({ column }) => (
@@ -31,9 +30,21 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => <div className="text-center">{row.index + 1}</div>,
   },
   {
-    accessorKey: "status",
+    accessorKey: "userRoleId",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader column={column} title="User Role Id" />
+    ),
+  },
+  {
+    accessorKey: "username",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Username" />
+    ),
+  },
+  {
+    accessorKey: "name",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="name" />
     ),
   },
   {
@@ -41,21 +52,6 @@ export const columns: ColumnDef<Payment>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Email" />
     ),
-  },
-  {
-    accessorKey: "amount",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Amount" />
-    ),
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
   },
   {
     id: "action",
