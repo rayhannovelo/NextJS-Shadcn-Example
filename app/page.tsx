@@ -27,8 +27,8 @@ import { handleSignIn } from "@/actions/authAction"
 import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
-  username: z.string().nonempty("Username is required"),
-  password: z.string().nonempty("Password is required"),
+  username: z.string().min(1, "Username is required"),
+  password: z.string().min(1, "Password is required"),
 })
 
 type AlertType = {
@@ -84,7 +84,7 @@ export default function Page({
       if (data && data.error) {
         setAlert({
           variant: "destructive",
-          title: "error",
+          title: "Error",
           description: data!.error,
         })
       }
