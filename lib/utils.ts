@@ -10,7 +10,7 @@ export function ucwords(str: string) {
 }
 
 export function title(str: string) {
-  return ucwords(str.slice(1)).replace("-", " ")
+  return ucwords(str).replace("-", " ")
 }
 
 export function formatNumber(number: number) {
