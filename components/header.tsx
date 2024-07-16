@@ -38,6 +38,7 @@ import { title } from "@/lib/utils"
 
 export default function Header() {
   const pathname = usePathname()
+  const paths = pathname.split("/")
 
   return (
     <header>
@@ -50,8 +51,18 @@ export default function Header() {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbPage>{title(pathname)}</BreadcrumbPage>
+                <BreadcrumbLink href={`/${paths[1]}`}>
+                  {title(paths[1])}
+                </BreadcrumbLink>
               </BreadcrumbItem>
+              {paths[2] && (
+                <>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{title(paths[2])}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </>
+              )}
             </BreadcrumbList>
           </Breadcrumb>
         </nav>

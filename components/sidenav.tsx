@@ -8,6 +8,7 @@ import { links } from "@/data/links"
 
 export default function SideNav() {
   const pathname = usePathname()
+  const paths = pathname.split("/")
 
   return (
     <aside className="flex flex-col border-r overflow-y-auto max-h-screen">
@@ -31,7 +32,7 @@ export default function SideNav() {
               href={link.href}
               className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
                 link.href
-                  ? pathname === link.href
+                  ? `/${paths[1]}` === link.href
                     ? "text-primary font-normal bg-muted"
                     : "text-muted-foreground hover:text-primary hover:bg-muted"
                   : "text-primary font-bold"
