@@ -16,6 +16,9 @@ import { DataTableColumnHeader } from "@/components/datatable-header-column"
 export type Users = {
   id: string
   userRoleId: number
+  user_role: {
+    userRoleName: string
+  }
   username: string
   name: string
   email: string
@@ -30,9 +33,9 @@ export const columns: ColumnDef<Users>[] = [
     cell: ({ row }) => <div className="text-center">{row.index + 1}</div>,
   },
   {
-    accessorKey: "userRoleId",
+    accessorKey: "user_role.userRoleName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="User Role Id" />
+      <DataTableColumnHeader column={column} title="User Role" />
     ),
   },
   {
@@ -51,6 +54,18 @@ export const columns: ColumnDef<Users>[] = [
     accessorKey: "email",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Email" />
+    ),
+  },
+  {
+    accessorKey: "createdAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Created At" />
+    ),
+  },
+  {
+    accessorKey: "updatedAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Updated At" />
     ),
   },
   {
