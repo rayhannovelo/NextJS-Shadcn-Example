@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-2 px-1 py-1 overflow-auto">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-2 px-1 pb-1 pt-3 overflow-auto">
         <div className="flex items-center gap-2 text-sm">
           <p>Show</p>
           <Select

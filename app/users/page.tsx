@@ -1,7 +1,8 @@
 import { Metadata } from "next"
+import Link from "next/link"
 import { auth } from "@/auth"
 import axios from "axios"
-import { AlertCircle } from "lucide-react"
+import { AlertCircle, Plus } from "lucide-react"
 import DashboardLayout from "@/components/dashboard-layout"
 import {
   Card,
@@ -12,6 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
 import { columns } from "./columns"
 import { DataTable } from "./data-table"
 
@@ -45,6 +47,11 @@ export default async function Users() {
             <CardDescription>Users Management</CardDescription>
           </CardHeader>
           <CardContent>
+            <Link href="/users/create" className="flex justify-end">
+              <Button variant="default">
+                <Plus className="w-4 h-4 mr-1" /> Create User
+              </Button>
+            </Link>
             {!data.success && (
               <Alert variant="destructive" className="mb-5">
                 <AlertCircle className="h-4 w-4" />
