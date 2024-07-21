@@ -47,11 +47,6 @@ export default async function Users() {
             <CardDescription>Users Management</CardDescription>
           </CardHeader>
           <CardContent>
-            <Link href="/users/create" className="flex justify-end">
-              <Button variant="default">
-                <Plus className="w-4 h-4 mr-1" /> Create User
-              </Button>
-            </Link>
             {!data.success && (
               <Alert variant="destructive" className="mb-5">
                 <AlertCircle className="h-4 w-4" />
@@ -59,6 +54,11 @@ export default async function Users() {
                 <AlertDescription>{data.message}</AlertDescription>
               </Alert>
             )}
+            <Link href="/users/create" className="flex justify-end">
+              <Button variant="default">
+                <Plus className="w-4 h-4 mr-1" /> Create User
+              </Button>
+            </Link>
             <DataTable columns={columns} data={data.data ?? []} />
           </CardContent>
           <CardFooter></CardFooter>
