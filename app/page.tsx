@@ -141,7 +141,7 @@ export default function Page({
                 )}
               />
               <Button className="w-full" type="submit" disabled={isPending}>
-                Submit
+                Log In
               </Button>
             </form>
           </Form>
