@@ -1,14 +1,14 @@
 "use client"
 
+import { redirect } from "next/navigation"
 import { useTransition, useState, useEffect, use } from "react"
 import { useForm } from "react-hook-form"
-import { Check, ChevronsUpDown, Eye, EyeOff } from "lucide-react"
+import { Check, ChevronsUpDown, CircleAlert, Eye, EyeOff } from "lucide-react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -30,19 +30,11 @@ import {
 } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
-import { cn, objectToFormData } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { getUserRoles, getUserStatuses } from "@/actions/masterAction"
 import { createUser } from "@/actions/usersAction"
 import { serialize } from "object-to-formdata"
-import { redirect } from "next/navigation"
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
-const ACCEPTED_FILE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-]
 const formSchema = z
   .object({
     userRoleId: z.coerce.string().min(1, "User Role is required"),
@@ -54,9 +46,12 @@ const formSchema = z
     email: z.string().email().min(1, "Email is required"),
     photo: z
       .instanceof(File)
-      .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+      .refine((file) => file?.size <= 5 * 1024 * 1024, `Max image size is 5MB.`)
       .refine(
-        (file) => ACCEPTED_FILE_TYPES.includes(file?.type),
+        (file) =>
+          ["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(
+            file?.type
+          ),
         "Only .jpg, .jpeg, .png and .webp formats are supported."
       ),
   })
@@ -121,16 +116,38 @@ export default function UserForm() {
       if (data.success) {
         toast({
           variant: "success",
-          title: "Success create user",
-          description: "",
+          description: (
+            <div className="flex gap-2 items-start">
+              <div className="flex flex-col justify-start ">
+                <Check className="w-10 h-10" />
+              </div>
+              <div>
+                <p className="font-bold text-lg">Success</p>
+                <p>{data.message}</p>
+              </div>
+            </div>
+          ),
         })
 
         redirect("/users")
       } else {
         toast({
           variant: "destructive",
-          title: "Error",
-          description: data.message,
+          description: (
+            <div className="flex gap-2 items-start">
+              <div className="flex flex-col justify-start ">
+                <CircleAlert className="w-10 h-10" />
+              </div>
+              <div>
+                <p className="font-bold text-lg">{data.message}</p>
+                <ul className="list-disc pl-5">
+                  {data.data.map((val: any, key: number) => (
+                    <li key={key}>{val.message}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ),
         })
       }
     })
