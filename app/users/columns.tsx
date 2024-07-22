@@ -11,6 +11,9 @@ export type Users = {
   user_role: {
     userRoleName: string
   }
+  user_status: {
+    userStatusName: string
+  }
   username: string
   name: string
   email: string
@@ -31,9 +34,9 @@ export const columns: ColumnDef<Users>[] = [
     ),
   },
   {
-    accessorKey: "username",
+    accessorKey: "user_status.userStatusName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Username" />
+      <DataTableColumnHeader column={column} title="User Status" />
     ),
   },
   {
