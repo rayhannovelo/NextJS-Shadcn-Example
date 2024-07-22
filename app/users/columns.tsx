@@ -17,6 +17,8 @@ export type Users = {
   username: string
   name: string
   email: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export const columns: ColumnDef<Users>[] = [
