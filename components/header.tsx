@@ -55,11 +55,19 @@ export default function Header() {
                   {title(paths[1])}
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              {paths[2] && (
+              {paths[2] && !paths[3] && (
                 <>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
                     <BreadcrumbPage>{title(paths[2])}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </>
+              )}
+              {paths[3] && (
+                <>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{title(paths[3])}</BreadcrumbPage>
                   </BreadcrumbItem>
                 </>
               )}
