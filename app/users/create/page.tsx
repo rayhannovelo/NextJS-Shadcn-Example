@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import UserForm from "../user-form"
+import DataForm from "../data-form"
 
 export const metadata: Metadata = {
   title: "Create User",
@@ -24,7 +24,7 @@ export default async function create() {
             <CardDescription>Create User Form</CardDescription>
           </CardHeader>
           <CardContent className="py-0">
-            <UserForm />
+            <DataForm />
           </CardContent>
           <CardFooter></CardFooter>
         </Card>

@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/card"
 import { getUser } from "@/actions/usersAction"
 import { notFound } from "next/navigation"
-import { encrypt, decrypt } from "@/lib/crypto"
-import UserForm from "../../user-form"
+import { decrypt } from "@/lib/crypto"
+import DataForm from "../../data-form"
 
 export const metadata: Metadata = {
   title: "Edit User",
@@ -34,7 +34,7 @@ export default async function edit({ params }: { params: { id: string } }) {
             <CardDescription>Edit User Form</CardDescription>
           </CardHeader>
           <CardContent className="py-0">
-            <UserForm user={data.data} />
+            <DataForm user={data.data} />
           </CardContent>
           <CardFooter></CardFooter>
         </Card>

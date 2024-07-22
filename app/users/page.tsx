@@ -43,7 +43,7 @@ export default async function Users() {
             )}
             <Link href="/users/create" className="flex justify-end">
               <Button variant="default">
-                <Plus className="w-4 h-4 mr-1" /> Create User
+                <Plus className="w-4 h-4 mr-1" /> Create
               </Button>
             </Link>
             <DataTable columns={columns} data={data.data ?? []} />
