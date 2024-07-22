@@ -8,10 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import UserForm from "@/components/forms/user-form"
 import { getUser } from "@/actions/usersAction"
 import { notFound } from "next/navigation"
 import { encrypt, decrypt } from "@/lib/crypto"
+import UserForm from "../../user-form"
 
 export const metadata: Metadata = {
   title: "Edit User",

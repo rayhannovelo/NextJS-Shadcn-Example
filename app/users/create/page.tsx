@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import UserForm from "@/components/forms/user-form"
+import UserForm from "../user-form"
 
 export const metadata: Metadata = {
   title: "Create User",
