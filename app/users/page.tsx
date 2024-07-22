@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import { getUsers } from "@/actions/usersAction"
 import { columns } from "./columns"
 import { DataTable } from "./data-table"
 
@@ -21,22 +22,8 @@ export const metadata: Metadata = {
   title: "Users",
 }
 
-async function getData() {
-  try {
-    const session = await auth()
-    const response = await axios.get(`${process.env.BACKEND_URL}/users`, {
-      headers: {
-        Authorization: `Bearer ${session?.user.userToken}`,
-      },
-    })
-    return response.data
-  } catch (error: any) {
-    return error.response.data
-  }
-}
-
 export default async function Users() {
-  const data = await getData()
+  const data = await getUsers()
 
   return (
     <DashboardLayout>

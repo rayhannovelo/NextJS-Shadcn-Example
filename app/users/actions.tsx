@@ -1,8 +1,10 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { useTransition, useState } from "react"
 import { Check, CircleAlert, Pencil, Settings, Trash2 } from "lucide-react"
+import { encrypt } from "@/lib/crypto"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -68,6 +70,7 @@ export default function Actions({ id }: { id: string }) {
       }
     })
   }
+
   return (
     <>
       <DropdownMenu>
@@ -79,8 +82,10 @@ export default function Actions({ id }: { id: string }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem>
-            <Pencil className="h-4 w-4 mr-2" /> Edit
+          <DropdownMenuItem asChild>
+            <Link href={`/users/${encodeURIComponent(encrypt(id))}/edit`}>
+              <Pencil className="h-4 w-4 mr-2" /> Edit
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="focus:bg-destructive focus:text-white"

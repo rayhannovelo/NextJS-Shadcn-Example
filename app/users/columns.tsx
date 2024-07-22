@@ -65,8 +65,10 @@ export const columns: ColumnDef<Users>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Actions" />
     ),
-    cell: ({ row }) => {
-      return <Actions id={row.original.id} />
-    },
+    cell: ({ row }) => (
+      <div className="text-center">
+        <Actions id={row.original.id} />
+      </div>
+    ),
   },
 ]

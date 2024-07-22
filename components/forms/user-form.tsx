@@ -1,6 +1,6 @@
 "use client"
 
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { useTransition, useState, useEffect, use } from "react"
 import { useForm } from "react-hook-form"
 import { Check, ChevronsUpDown, CircleAlert, Eye, EyeOff } from "lucide-react"
@@ -32,34 +32,8 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import { getUserRoles, getUserStatuses } from "@/actions/masterAction"
-import { createUser } from "@/actions/usersAction"
+import { createUser, editUser } from "@/actions/usersAction"
 import { serialize } from "object-to-formdata"
-
-const formSchema = z
-  .object({
-    userRoleId: z.coerce.string().min(1, "User Role is required"),
-    userStatusId: z.coerce.string().min(1, "User Status is required"),
-    username: z.string().min(1, "Username is required"),
-    password: z.string().min(8),
-    passwordConfirmation: z.string().min(8),
-    name: z.string().min(1, "Name is required"),
-    email: z.string().email().min(1, "Email is required"),
-    photo: z
-      .instanceof(File)
-      .refine((file) => file?.size <= 5 * 1024 * 1024, `Max image size is 5MB.`)
-      .refine(
-        (file) =>
-          ["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(
-            file?.type
-          ),
-        "Only .jpg, .jpeg, .png and .webp formats are supported."
-      ),
-  })
-  .refine((data) => data.password === data.passwordConfirmation, {
-    message:
-      "The password field and passwordConfirmation field must be the same",
-    path: ["passwordConfirmation"],
-  })
 
 type userRoles = {
   id: string
@@ -71,7 +45,8 @@ type userStatuses = {
   userStatusName: string
 }
 
-export default function UserForm() {
+export default function UserForm({ user }: { user?: any }) {
+  const router = useRouter()
   const { toast } = useToast()
   const [userRoles, setUserRoles] = useState<userRoles[]>([])
   const [userStatuses, setUserStatuses] = useState<userStatuses[]>([])
@@ -80,6 +55,39 @@ export default function UserForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false)
+
+  const formSchema = z
+    .object({
+      userRoleId: z.coerce.string().min(1, "User Role is required"),
+      userStatusId: z.coerce.string().min(1, "User Status is required"),
+      username: z.string().min(1, "Username is required"),
+      password: user ? z.string().min(8).or(z.literal("")) : z.string().min(8),
+      passwordConfirmation: user
+        ? z.string().min(8).or(z.literal(""))
+        : z.string().min(8),
+      name: z.string().min(1, "Name is required"),
+      email: z.string().email().min(1, "Email is required"),
+      photo: z
+        .instanceof(File)
+        .refine(
+          (file) => file?.size <= 5 * 1024 * 1024,
+          `Max image size is 5MB.`
+        )
+        .refine(
+          (file) =>
+            ["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(
+              file?.type
+            ),
+          "Only .jpg, .jpeg, .png and .webp formats are supported."
+        )
+        .nullable()
+        .optional(),
+    })
+    .refine((data) => data.password === data.passwordConfirmation, {
+      message:
+        "The password field and passwordConfirmation field must be the same",
+      path: ["passwordConfirmation"],
+    })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,23 +103,36 @@ export default function UserForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      userRoleId: "",
-      userStatusId: "",
-      username: "",
-      password: "",
-      passwordConfirmation: "",
-      name: "",
-      email: "",
-      photo: undefined,
-    },
+    defaultValues: user
+      ? {
+          userRoleId: user.userRoleId ?? "",
+          userStatusId: user.userStatusId ?? "",
+          username: user.username ?? "",
+          password: "",
+          passwordConfirmation: "",
+          name: user.name ?? "",
+          email: user.email ?? "",
+          photo: undefined,
+        }
+      : {
+          userRoleId: "",
+          userStatusId: "",
+          username: "",
+          password: "",
+          passwordConfirmation: "",
+          name: "",
+          email: "",
+          photo: undefined,
+        },
   })
 
   const [isPending, startTransition] = useTransition()
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       const formData = serialize(values)
-      const data = await createUser(formData)
+      const data = user
+        ? await editUser(user.id, formData)
+        : await createUser(formData)
 
       if (data.success) {
         toast({
@@ -129,7 +150,8 @@ export default function UserForm() {
           ),
         })
 
-        redirect("/users")
+        router.push("/users")
+        router.refresh()
       } else {
         toast({
           variant: "destructive",
