@@ -31,7 +31,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
-import { getUserRoles, getUserStatuses } from "@/actions/masterAction"
+import { getUserRoles } from "@/actions/userRolesAction"
+import { getUserStatuses } from "@/actions/userStatusesAction"
 import { createUser, editUser } from "@/actions/usersAction"
 import { serialize } from "object-to-formdata"
 
@@ -92,10 +93,10 @@ export default function UserForm({ user }: { user?: any }) {
   useEffect(() => {
     const fetchData = async () => {
       const userRoles = await getUserRoles()
-      setUserRoles(userRoles)
+      setUserRoles(userRoles.data)
 
       const userStatuses = await getUserStatuses()
-      setUserStatuses(userStatuses)
+      setUserStatuses(userStatuses.data)
     }
 
     fetchData()
