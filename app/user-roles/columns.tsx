@@ -19,6 +19,7 @@ export const columns: ColumnDef<UserRoles>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="ID" />
     ),
+    cell: ({ row }) => <div className="text-center">{row.original.id}</div>,
   },
   {
     accessorKey: "userRoleName",
