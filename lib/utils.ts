@@ -16,3 +16,10 @@ export function title(str: string) {
 export function formatNumber(number: number) {
   return new Intl.NumberFormat("de-DE").format(number)
 }
+
+export function nl2br(str: string) {
+  if (typeof str === "string") {
+    return str.replace(/\n/g, "<br>")
+  }
+  return str
+}
