@@ -101,9 +101,9 @@ export default function UserForm({ data }: { data?: any }) {
           name="userRoleName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>User Role name</FormLabel>
+              <FormLabel>User Role</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="User Role Name" {...field} />
+                <Input type="text" placeholder="User Role" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -114,13 +114,9 @@ export default function UserForm({ data }: { data?: any }) {
           name="userRoleDescription"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>User Role Description</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input
-                  type="text"
-                  placeholder="User Role Description"
-                  {...field}
-                />
+                <Input type="text" placeholder="Description" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
