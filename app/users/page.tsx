@@ -1,7 +1,5 @@
 import { Metadata } from "next"
 import Link from "next/link"
-import { auth } from "@/auth"
-import axios from "axios"
 import { AlertCircle, Plus } from "lucide-react"
 import DashboardLayout from "@/components/dashboard-layout"
 import {
