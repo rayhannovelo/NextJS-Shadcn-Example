@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   ColumnDef,
   SortingState,
@@ -29,20 +29,25 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { DataTablePagination } from "@/components/datatable-pagination"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  page: number
+  limit: number
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  page,
+  limit,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0, //initial page index
-    pageSize: 10, //default page size
+    pageIndex: page, //initial page index
+    pageSize: limit, //default page size
   })
   const [globalFilter, setGlobalFilter] = useState("")
 
@@ -62,6 +67,20 @@ export function DataTable<TData, TValue>({
       globalFilter,
     },
   })
+
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  useEffect(() => {
+    if (pagination.pageIndex !== page) {
+      // console.log("a")
+      const params = new URLSearchParams(searchParams)
+      params.set("page", "1")
+      params.set("limit", pagination.pageSize.toString())
+      const url = `${pathname}?${params.toString()}`
+      router.replace(url)
+    }
+  }, [router, pathname, searchParams, pagination, page, limit])
 
   return (
     <div>

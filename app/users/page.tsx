@@ -22,8 +22,19 @@ export const metadata: Metadata = {
   title: "Users",
 }
 
-export default async function Users() {
+export default async function Users({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: string
+    limit?: string
+  }
+}) {
+  const page = searchParams?.page ? Number(searchParams?.page) : 0
+  const limit = searchParams?.limit ? Number(searchParams?.limit) : 1
   const data = await getUsers()
+
+  console.log("1", page, limit)
 
   return (
     <DashboardLayout>
@@ -46,7 +57,12 @@ export default async function Users() {
                 <Plus className="w-4 h-4 mr-1" /> Create
               </Button>
             </Link>
-            <DataTable columns={columns} data={data.data ?? []} />
+            <DataTable
+              columns={columns}
+              data={data.data ?? []}
+              page={page}
+              limit={limit}
+            />
           </CardContent>
           <CardFooter></CardFooter>
         </Card>

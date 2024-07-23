@@ -56,7 +56,9 @@ export function DataTablePagination<TData>({
         <Button
           variant="outline"
           className="h-8 w-8 p-0"
-          onClick={() => table.nextPage()}
+          onClick={() =>
+            table.setPageIndex(table.getState().pagination.pageIndex + 1)
+          }
           disabled={!table.getCanNextPage()}
         >
           <ChevronRightIcon className="h-4 w-4" />
