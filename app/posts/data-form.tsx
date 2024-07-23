@@ -40,8 +40,8 @@ export default function UserForm({ data }: { data?: any }) {
         },
   })
 
-  const bodyRef = useRef<HTMLTextAreaElement>(null)
   const body = form.watch("body")
+  const bodyRef = useRef<HTMLTextAreaElement>(null)
   useEffect(() => {
     if (bodyRef.current) {
       bodyRef.current.style.height = "auto"
