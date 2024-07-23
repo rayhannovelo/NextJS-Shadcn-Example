@@ -8,6 +8,8 @@ declare module "next-auth" {
   interface User {
     userRoleId: number
     userStatusId: number
+    username: string
+    photo: string
     userToken: string
   }
 
@@ -20,6 +22,8 @@ declare module "next-auth/jwt" {
   interface JWT {
     userRoleId: number
     userStatusId: number
+    username: string
+    photo: string
     userToken: string
   }
 }
@@ -78,6 +82,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         token.userRoleId = user.userRoleId
         token.userStatusId = user.userStatusId
+        token.username = user.username
+        token.photo = user.photo
         token.userToken = user.userToken
       }
 
@@ -87,6 +93,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token) {
         session.user.userRoleId = token.userRoleId
         session.user.userStatusId = token.userStatusId
+        session.user.username = token.username
+        session.user.photo = token.photo
         session.user.userToken = token.userToken
       }
 
