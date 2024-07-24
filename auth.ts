@@ -11,6 +11,9 @@ declare module "next-auth" {
     username: string
     photo: string
     userToken: string
+    emailVerifiedAt: Date
+    createdAt: Date
+    updatedAt: Date
   }
 
   interface Session {
@@ -20,11 +23,7 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
   interface JWT {
-    userRoleId: number
-    userStatusId: number
-    username: string
-    photo: string
-    userToken: string
+    user: User
   }
 }
 
@@ -78,27 +77,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       }
     },
-    jwt({ token, user }) {
+    jwt({ token, user, trigger, session }) {
+      // login data
       if (user) {
-        token.userRoleId = user.userRoleId
-        token.userStatusId = user.userStatusId
-        token.username = user.username
-        token.photo = user.photo
-        token.userToken = user.userToken
+        return { ...token, user }
+      }
+
+      // update profile
+      if (trigger === "update") {
+        return { ...token, user: session.user }
       }
 
       return token
     },
     session({ session, token }) {
-      if (token) {
-        session.user.userRoleId = token.userRoleId
-        session.user.userStatusId = token.userStatusId
-        session.user.username = token.username
-        session.user.photo = token.photo
-        session.user.userToken = token.userToken
+      return {
+        ...session,
+        user: {
+          ...token.user,
+          ...session?.user,
+        },
       }
-
-      return session
     },
   },
 })
