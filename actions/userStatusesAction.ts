@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth"
 import axios from "axios"
+import { axiosErrorHandler } from "@/lib/errorHandler"
 
 const backendUrl = process.env.BACKEND_URL
 
@@ -14,8 +15,8 @@ export const getUserStatuses = async () => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }
 
@@ -28,8 +29,8 @@ export const createUserStatus = async (formData: FormData) => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }
 
@@ -42,8 +43,8 @@ export const getUserStatus = async (id: string | null) => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }
 
@@ -60,8 +61,8 @@ export const editUserStatus = async (id: number, formData: FormData) => {
       }
     )
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }
 
@@ -74,7 +75,7 @@ export const deleteUserStatus = async (id: string) => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }

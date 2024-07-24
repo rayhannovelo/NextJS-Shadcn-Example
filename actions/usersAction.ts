@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth"
 import axios from "axios"
+import { axiosErrorHandler } from "@/lib/errorHandler"
 
 const backendUrl = process.env.BACKEND_URL
 
@@ -14,8 +15,8 @@ export const getUsers = async () => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }
 
@@ -28,8 +29,8 @@ export const createUser = async (formData: FormData) => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }
 
@@ -42,8 +43,8 @@ export const getUser = async (id: string | null) => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }
 
@@ -56,8 +57,8 @@ export const editUser = async (id: number, formData: FormData) => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }
 
@@ -70,7 +71,7 @@ export const deleteUser = async (id: string) => {
       },
     })
     return response.data
-  } catch (error: any) {
-    return error.response.data
+  } catch (error) {
+    return axiosErrorHandler(error)
   }
 }

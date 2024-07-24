@@ -4,7 +4,7 @@ import { signIn, signOut, auth } from "@/auth"
 import { AuthError } from "next-auth"
 import { z } from "zod"
 import axios from "axios"
-import { handleAxiosError } from "@/lib/errorHandler"
+import { axiosErrorHandler } from "@/lib/errorHandler"
 
 const backendUrl = process.env.BACKEND_URL
 
@@ -55,7 +55,7 @@ export const getProfile = async () => {
     })
     return response.data
   } catch (error) {
-    return handleAxiosError(error)
+    return axiosErrorHandler(error)
   }
 }
 
@@ -69,6 +69,6 @@ export const updateProfile = async (formData: FormData) => {
     })
     return response.data
   } catch (error: any) {
-    return handleAxiosError(error)
+    return axiosErrorHandler(error)
   }
 }
