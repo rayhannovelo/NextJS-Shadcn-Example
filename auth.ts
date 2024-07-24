@@ -85,7 +85,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       // update profile
       if (trigger === "update") {
-        return { ...token, user: session.user }
+        return { ...token, user: { ...token.user, ...session.user } }
       }
 
       return token
@@ -94,8 +94,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return {
         ...session,
         user: {
-          ...token.user,
           ...session?.user,
+          ...token.user,
         },
       }
     },
