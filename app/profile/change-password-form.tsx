@@ -22,6 +22,7 @@ import { changePassword } from "@/actions/authAction"
 
 export default function ChangePasswordForm() {
   const router = useRouter()
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false)
@@ -106,19 +107,23 @@ export default function ChangePasswordForm() {
               <FormLabel>Current Password</FormLabel>
               <FormControl>
                 <div className="relative">
-                  {showPassword ? (
+                  {showCurrentPassword ? (
                     <Eye
                       className="absolute right-2.5 top-2.5 h-5 w-5"
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() =>
+                        setShowCurrentPassword(!showCurrentPassword)
+                      }
                     />
                   ) : (
                     <EyeOff
                       className="absolute right-2.5 top-2.5 h-5 w-5"
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() =>
+                        setShowCurrentPassword(!showCurrentPassword)
+                      }
                     />
                   )}
                   <Input
-                    type={showPassword ? "text" : "password"}
+                    type={showCurrentPassword ? "text" : "password"}
                     placeholder="Password"
                     {...field}
                   />
