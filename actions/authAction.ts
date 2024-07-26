@@ -72,3 +72,21 @@ export const updateProfile = async (formData: FormData) => {
     return axiosErrorHandler(error)
   }
 }
+
+export const changePassword = async (formData: FormData) => {
+  try {
+    const session = await auth()
+    const response = await axios.put(
+      `${backendUrl}/auth/change-password`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${session?.user.userToken}`,
+        },
+      }
+    )
+    return response.data
+  } catch (error: any) {
+    return axiosErrorHandler(error)
+  }
+}
