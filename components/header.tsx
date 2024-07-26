@@ -18,16 +18,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import {
-  PanelLeft,
-  Cpu,
-  Home,
-  Users,
-  UserCog,
-  UserCheck,
-  User,
-  FileText,
-} from "lucide-react"
+import { PanelLeft, Cpu } from "lucide-react"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
@@ -35,8 +26,10 @@ import { ThemeButton } from "@/components/theme-button"
 import { UserButton } from "@/components/user-button"
 import { links } from "@/data/links"
 import { title } from "@/lib/utils"
+import { useSession } from "next-auth/react"
 
 export default function Header() {
+  const { data: session } = useSession()
   const pathname = usePathname()
   const paths = pathname.split("/")
 
@@ -75,7 +68,7 @@ export default function Header() {
           </Breadcrumb>
         </nav>
         <div className="flex gap-5">
-          <div className="relative">
+          <div className="relative hidden xl:block">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
@@ -86,6 +79,12 @@ export default function Header() {
           <div className="flex flex-nowrap">
             <ThemeButton />
             <UserButton />
+            <div className="flex flex-col justify-center ml-2 text-xs">
+              <p className="font-bold">{session?.user.name}</p>
+              <p className="text-muted-foreground">
+                {session?.user.user_role.userRoleName}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -130,7 +129,7 @@ export default function Header() {
           <Cpu className="w-8 h-8" />
           <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </div>
-        <div>
+        <div className="flex flex-row">
           <ThemeButton />
           <UserButton />
         </div>

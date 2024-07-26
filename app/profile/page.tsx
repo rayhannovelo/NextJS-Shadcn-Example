@@ -10,7 +10,6 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import AccountForm from "./account-form"
 import ChangePasswordForm from "./change-password-form"
-import { SessionProvider } from "next-auth/react"
 
 export const metadata: Metadata = {
   title: "Profile",
@@ -34,9 +33,7 @@ export default function Profile() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <SessionProvider>
-                  <AccountForm />
-                </SessionProvider>
+                <AccountForm />
               </CardContent>
             </Card>
           </TabsContent>

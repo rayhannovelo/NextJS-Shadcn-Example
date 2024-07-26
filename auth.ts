@@ -14,6 +14,12 @@ declare module "next-auth" {
     emailVerifiedAt: Date
     createdAt: Date
     updatedAt: Date
+    user_role: {
+      userRoleName: string
+    }
+    user_status: {
+      userStatusName: string
+    }
   }
 
   interface Session {
