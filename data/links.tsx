@@ -1,12 +1,4 @@
-import {
-  Users,
-  UserCog,
-  UserCheck,
-  User,
-  FileText,
-  Bell,
-  Home,
-} from "lucide-react"
+import { Users, UserCog, UserCheck, User, FileText, Home } from "lucide-react"
 
 export const defaultLinks = [
   { name: "Main Navigation", href: "", icon: null },
