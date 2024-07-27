@@ -26,11 +26,12 @@ import { ThemeButton } from "@/components/theme-button"
 import { UserButton } from "@/components/user-button"
 import { getLinks } from "@/data/links"
 import { title } from "@/lib/utils"
-import { Session } from "next-auth"
+import { useSession } from "next-auth/react"
 
-export default function Header({ session }: { session: Session | null }) {
+export default function Header() {
   const pathname = usePathname()
   const paths = pathname.split("/")
+  const { data: session } = useSession()
   const links = getLinks(session?.user.userRoleId)
 
   return (
