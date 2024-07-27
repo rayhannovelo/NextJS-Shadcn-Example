@@ -24,14 +24,14 @@ import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { ThemeButton } from "@/components/theme-button"
 import { UserButton } from "@/components/user-button"
-import { links } from "@/data/links"
+import { getLinks } from "@/data/links"
 import { title } from "@/lib/utils"
-import { useSession } from "next-auth/react"
+import { Session } from "next-auth"
 
-export default function Header() {
-  const { data: session } = useSession()
+export default function Header({ session }: { session: Session | null }) {
   const pathname = usePathname()
   const paths = pathname.split("/")
+  const links = getLinks(session?.user.userRoleId)
 
   return (
     <header>

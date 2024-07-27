@@ -4,11 +4,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Cpu, Bell } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { links } from "@/data/links"
+import { getLinks } from "@/data/links"
+import { Session } from "next-auth"
 
-export default function SideNav() {
+export default function SideNav({ session }: { session: Session | null }) {
   const pathname = usePathname()
   const paths = pathname.split("/")
+  const links = getLinks(session?.user.userRoleId)
 
   return (
     <aside className="flex flex-col border-r overflow-y-auto max-h-screen">
