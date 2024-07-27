@@ -79,7 +79,7 @@ export default function Header() {
           </div>
           <div className="flex">
             <ThemeButton />
-            <UserButton />
+            <UserButton photo={session?.user.photo} />
             <div className="flex flex-col justify-center ml-2 text-xs">
               <p className="font-bold">{session?.user.name}</p>
               <p className="text-muted-foreground">

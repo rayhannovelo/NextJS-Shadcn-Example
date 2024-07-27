@@ -12,7 +12,8 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { handleSignOut } from "@/actions/authAction"
 
-export function UserButton() {
+export function UserButton({ photo }: { photo?: string | null }) {
+  console.log(photo)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,7 +25,7 @@ export function UserButton() {
           >
             <Avatar>
               <AvatarImage
-                src="https://github.com/shadcn.png"
+                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/uploads/user-photo/${photo}`}
                 className="h-10 w-10"
               />
               <AvatarFallback>
@@ -32,7 +33,7 @@ export function UserButton() {
               </AvatarFallback>
             </Avatar>
           </Button>
-          <span className="sr-only">Toggle user menu</span>
+          <span className="sr-only"></span>
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
