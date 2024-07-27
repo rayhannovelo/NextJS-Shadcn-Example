@@ -110,16 +110,12 @@ export default function ChangePasswordForm() {
                   {showCurrentPassword ? (
                     <Eye
                       className="absolute right-2.5 top-2.5 h-5 w-5"
-                      onClick={() =>
-                        setShowCurrentPassword(!showCurrentPassword)
-                      }
+                      onClick={() => setShowCurrentPassword((prev) => !prev)}
                     />
                   ) : (
                     <EyeOff
                       className="absolute right-2.5 top-2.5 h-5 w-5"
-                      onClick={() =>
-                        setShowCurrentPassword(!showCurrentPassword)
-                      }
+                      onClick={() => setShowCurrentPassword((prev) => !prev)}
                     />
                   )}
                   <Input
@@ -144,12 +140,12 @@ export default function ChangePasswordForm() {
                   {showPassword ? (
                     <Eye
                       className="absolute right-2.5 top-2.5 h-5 w-5"
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() => setShowPassword((prev) => !prev)}
                     />
                   ) : (
                     <EyeOff
                       className="absolute right-2.5 top-2.5 h-5 w-5"
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() => setShowPassword((prev) => !prev)}
                     />
                   )}
                   <Input
@@ -175,14 +171,14 @@ export default function ChangePasswordForm() {
                     <Eye
                       className="absolute right-2.5 top-2.5 h-5 w-5"
                       onClick={() =>
-                        setShowPasswordConfirmation(!showPasswordConfirmation)
+                        setShowPasswordConfirmation((prev) => !prev)
                       }
                     />
                   ) : (
                     <EyeOff
                       className="absolute right-2.5 top-2.5 h-5 w-5"
                       onClick={() =>
-                        setShowPasswordConfirmation(!showPasswordConfirmation)
+                        setShowPasswordConfirmation((prev) => !prev)
                       }
                     />
                   )}

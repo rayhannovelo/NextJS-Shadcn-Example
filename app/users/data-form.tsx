@@ -330,12 +330,12 @@ export default function UserForm({ user }: { user?: any }) {
                   {showPassword ? (
                     <Eye
                       className="absolute right-2.5 top-2.5 h-5 w-5"
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() => setShowPassword((prev) => !prev)}
                     />
                   ) : (
                     <EyeOff
                       className="absolute right-2.5 top-2.5 h-5 w-5"
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() => setShowPassword((prev) => !prev)}
                     />
                   )}
                   <Input
@@ -361,14 +361,14 @@ export default function UserForm({ user }: { user?: any }) {
                     <Eye
                       className="absolute right-2.5 top-2.5 h-5 w-5"
                       onClick={() =>
-                        setShowPasswordConfirmation(!showPasswordConfirmation)
+                        setShowPasswordConfirmation((prev) => !prev)
                       }
                     />
                   ) : (
                     <EyeOff
                       className="absolute right-2.5 top-2.5 h-5 w-5"
                       onClick={() =>
-                        setShowPasswordConfirmation(!showPasswordConfirmation)
+                        setShowPasswordConfirmation((prev) => !prev)
                       }
                     />
                   )}

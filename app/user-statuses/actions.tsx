@@ -91,7 +91,7 @@ export default function Actions({ id }: { id: string }) {
           </DropdownMenuItem>
           <DropdownMenuItem
             className="focus:bg-destructive focus:text-white"
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen((prev) => !prev)}
           >
             <Trash2 className="h-4 w-4 mr-2" /> Delete
           </DropdownMenuItem>
