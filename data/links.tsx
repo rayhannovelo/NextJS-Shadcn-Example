@@ -1,8 +1,16 @@
-import { Users, UserCog, UserCheck, User, FileText, Bell } from "lucide-react"
+import {
+  Users,
+  UserCog,
+  UserCheck,
+  User,
+  FileText,
+  Bell,
+  Home,
+} from "lucide-react"
 
 export const links = [
-  { name: "Home", href: "", icon: null },
-  { name: "Dashboard", href: "/dashboard", icon: Bell },
+  { name: "Main Navigation", href: "", icon: null },
+  { name: "Dashboard", href: "/dashboard", icon: Home },
   { name: "Profile", href: "/profile", icon: User },
   { name: "User Management", href: "", icon: null },
   { name: "Users", href: "/users", icon: Users },
