@@ -77,7 +77,7 @@ export default function Header() {
               className="w-full rounded-lg bg-background pl-8 md:w-[180px] lg:w-[336px]"
             />
           </div>
-          <div className="flex flex-nowrap">
+          <div className="flex">
             <ThemeButton />
             <UserButton />
             <div className="flex flex-col justify-center ml-2 text-xs">
@@ -130,7 +130,7 @@ export default function Header() {
           <Cpu className="w-8 h-8" />
           <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
         </div>
-        <div className="flex flex-row">
+        <div className="flex">
           <ThemeButton />
           <UserButton />
         </div>

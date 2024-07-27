@@ -17,7 +17,11 @@ export function UserButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="flex items-center">
-          <Button variant="outline" size="icon" className="rounded-full">
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full ml-2 md:ml-5"
+          >
             <Avatar>
               <AvatarImage
                 src="https://github.com/shadcn.png"
