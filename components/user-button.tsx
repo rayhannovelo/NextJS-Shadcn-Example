@@ -13,7 +13,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { handleSignOut } from "@/actions/authAction"
 
 export function UserButton({ photo }: { photo?: string | null }) {
-  console.log(photo)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,10 +23,12 @@ export function UserButton({ photo }: { photo?: string | null }) {
             className="rounded-full ml-2 md:ml-5"
           >
             <Avatar>
-              <AvatarImage
-                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/uploads/user-photo/${photo}`}
-                className="h-10 w-10"
-              />
+              {photo && (
+                <AvatarImage
+                  src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/uploads/user-photo/${photo}`}
+                  className="h-10 w-10"
+                />
+              )}
               <AvatarFallback>
                 <User className="h-5 w-5" />
               </AvatarFallback>
