@@ -132,7 +132,7 @@ export default function Header() {
         </div>
         <div className="flex">
           <ThemeButton />
-          <UserButton />
+          <UserButton photo={session?.user.photo} />
         </div>
       </div>
     </header>
