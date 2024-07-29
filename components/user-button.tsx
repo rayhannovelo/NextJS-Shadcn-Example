@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { handleSignOut } from "@/actions/authAction"
+import Link from "next/link"
 
 export function UserButton({ photo }: { photo?: string | null }) {
   return (
@@ -40,8 +41,12 @@ export function UserButton({ photo }: { photo?: string | null }) {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Settings</DropdownMenuItem>
-        <DropdownMenuItem>Support</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={"/"}>Dashboard</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={"/profile"}>Profile</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <form
